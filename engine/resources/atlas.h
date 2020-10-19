@@ -50,48 +50,47 @@ namespace engine::resources {
             float height_gap = std::get<4>(container.begin()->second);
 
 
-            // for each loaded texture
+            // create the image we are going to load and the texture we are going to fill with it
+            sf::Image image;
+            sf::Texture text;
+
+            // for each grh
             uint32_t current = 0;
             for (const auto& [number, data] : container) {
                 // retrieve texture size and calculate save height gap
                 auto [name, left, top, width, height] = data;
 
-                sf::Texture text;
                 if (current != name) {
                     // load image from source file
-                    sf::Image image;
                     if (!image.loadFromFile(grhs_path / (std::to_string(name) + ".png"))) {
                         continue;
                     }
 
                     // mask from black to remove background
                     image.createMaskFromColor(sf::Color::Black);
-
+                    current = name;
+                    
                     // load the texture
-                    if (!text.loadFromImage(image, sf::IntRect{ left, top, width, height })) {
+                    if (!text.loadFromImage(image)) {
                         continue;
                     }
-                    current = name;
                 }
 
-                // retreve the loaded texture size
-                auto texture_size = text.getSize();
-
                 // we can still create a new row?
-                if (position.y + texture_size.y >= max_text_size - 1) {
+                if (position.y + height >= max_text_size - 1) {
                     throw std::runtime_error{ "Render texture is too big." };
                 }
 
                 // are we out of space to shape right?
-                if (position.x + texture_size.x >= max_text_size - 1) {
+                if (position.x + width >= max_text_size - 1) {
                     // jump to the next row and start again
                     position.y += height_gap;
                     position.x = 0.f;
-                    height_gap = texture_size.y;
+                    height_gap = height;
                 }
                 
                 // load it into a sprite
-                sf::Sprite sprite{ text };
+                sf::Sprite sprite{ text, sf::IntRect{ left, top, width, height } };
 
                 // position the sprite and render it into the render structure
                 sprite.setPosition({ static_cast<float>(position.x), static_cast<float>(position.y) });
@@ -102,11 +101,11 @@ namespace engine::resources {
                 _positions.emplace(
                     std::piecewise_construct_t{},
                     std::forward_as_tuple(number),
-                    std::forward_as_tuple(position.x, position.y, texture_size.x, texture_size.y)
+                    std::forward_as_tuple(position.x, position.y, width, height)
                 );
 
                 // shift right
-                position.x += texture_size.x;
+                position.x += width;
             }
         }
 

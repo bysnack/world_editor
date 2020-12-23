@@ -1,0 +1,3 @@
+/home/andres/personal/engine/examples/argentum/build/CMakeFiles/rebuild_cache.dir
+/home/andres/personal/engine/examples/argentum/build/CMakeFiles/argentum.dir
+/home/andres/personal/engine/examples/argentum/build/CMakeFiles/edit_cache.dir

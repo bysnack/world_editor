@@ -4,6 +4,10 @@
 namespace engine::components {
 
     struct speed : public component {
+        speed(float dt) :
+            dt{ dt }
+        {}
+
         float dt;
     };
 }

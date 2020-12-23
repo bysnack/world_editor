@@ -113,8 +113,12 @@ namespace engine::resources {
             return render_texture->getTexture();
         }
 
-        auto begin()        { return _positions.begin();    }
-        auto end()          { return _positions.end();      }
+        operator const sf::Texture*() const {
+            return &render_texture->getTexture();
+        }
+
+        auto begin()  const { return _positions.begin();    }
+        auto end()    const { return _positions.end();      }
         auto cbegin() const { return _positions.cbegin();   }
         auto cend()   const { return _positions.cend();     }
 

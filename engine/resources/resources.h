@@ -17,7 +17,7 @@ namespace engine::resources {
         {}
 
         template<class resource_t>
-        resource_t& get() {
+        const resource_t& get() const {
             return std::get<resource_t>(_resources);
         }
 

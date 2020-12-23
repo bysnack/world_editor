@@ -2,5 +2,11 @@
 
 namespace engine::components {
 
-    using texture = sf::Texture;
+    struct texture : public component {
+        operator const sf::Texture&() {
+            return data;
+        }
+
+        sf::Texture data;
+    };
 }

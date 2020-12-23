@@ -1,0 +1,1 @@
+/usr/bin/clang++-10    -rdynamic CMakeFiles/argentum.dir/argentum.cpp.o  -o argentum -ltgui -lsfml-graphics -lsfml-audio -lsfml-system -lsfml-window /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.9.5 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.9.5 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.9.5 

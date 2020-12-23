@@ -11,7 +11,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "/usr/share/tgui-0.7/cmake/Modules/")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include_directories(${SFML_INCLUDE_DIR}
-				    ${CMAKE_SOURCE_DIR})
+					${CMAKE_SOURCE_DIR}
+					third_party/GSL/include)
 
 find_package(SFML REQUIRED COMPONENTS graphics audio system window)
 find_package(TGUI REQUIRED)

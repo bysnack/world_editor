@@ -7,6 +7,37 @@
 
 namespace engine::entities {
 
+
+    template<typename T>
+    struct function_traits : public function_traits<decltype(&T::operator())> {};
+
+    template <typename ret_t, typename class_t, typename... args_t>
+    struct function_traits<ret_t (class_t::*)(args_t...)> {
+
+        using return_type = ret_t;
+        using class_type = class_t;
+        using arguments = std::tuple<args_t...>;
+        using system = std::function<ret_t(args_t...)>;
+
+        template <size_t N>
+        struct argument {
+            using type = std::tuple_element_t<N, arguments>;
+        };
+    };
+
+    template <typename ret_t, typename... args_t>
+    struct function_traits<ret_t (*)(args_t...)> {
+
+        using return_type = ret_t;
+        using arguments = std::tuple<args_t...>;
+        using system = std::function<ret_t(args_t...)>;
+
+        template <size_t N>
+        struct argument {
+            using type = std::tuple_element_t<N, arguments>;
+        };
+    };
+
     struct entity {
         entity() = default;
 
@@ -33,7 +64,7 @@ namespace engine::entities {
 
         template<class component_t>
         component_t* get_component() {
-            return static_cast<component_t*>(_components.at(typeid(component_t)).get());
+            return dynamic_cast<component_t*>(_components.at(typeid(component_t)).get());
         }
 
         template<class ...components_t>
@@ -45,10 +76,10 @@ namespace engine::entities {
 
         template<class ...component_t>
         bool has_components() noexcept {
-            // prepare type info container
-            std::list<std::type_index> info{ typeid(component_t)... };
+                // prepare type info container
+                std::list<std::type_index> info{ typeid(component_t)... };
 
-            // for each component
+                // for each component
             for (auto&& [key, value] : _components) {
                 // for each type
                 for (auto&& type : info) {
@@ -67,6 +98,15 @@ namespace engine::entities {
             }
 
             return false;
+        }
+
+        template<typename handler_t>
+        void with_components(handler_t&& handler) {
+            using args_t = typename function_traits<handler_t>::arguments;
+            args_t args;
+            std::apply([&](auto&& ...arguments){
+                handler(dynamic_cast<decltype(arguments)>(_components.at(typeid(decltype(arguments))).get())...);
+            }, args);
         }
 
         std::unordered_map<std::type_index, std::unique_ptr<components::component>> _components;

@@ -1,0 +1,6 @@
+add_subdirectory(meta)
+add_subdirectory(di)
+add_subdirectory(core)
+add_subdirectory(level)
+add_subdirectory(graphics)
+add_subdirectory(application)

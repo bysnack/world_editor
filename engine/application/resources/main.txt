@@ -1,0 +1,54 @@
+Panel.window {
+    Position = (160, 120);
+    Size = (1740, 750);
+
+    Renderer {
+        BackgroundColor = rgb(80, 80, 80);
+        TextureBackground = None;
+    }
+}
+
+ListBox.entities_list_box {
+    ItemHeight = 20;
+    MaximumItems = 0;
+    Position = (10, 120);
+    Size = (140, 752);
+    TextSize = 13;
+
+    Renderer {
+        BackgroundColor = #F5F5F5;
+        BackgroundColorHover = white;
+        BorderColor = black;
+        Borders = (1, 1, 1, 1);
+        Padding = (0, 0, 0, 0);
+        SelectedBackgroundColor = #006EFF;
+        SelectedBackgroundColorHover = #1E96FF;
+        SelectedTextColor = white;
+        TextColor = #3C3C3C;
+        TextColorHover = black;
+        TextureBackground = None;
+    }
+}
+
+TextArea.TextArea1 {
+    HorizontalScrollbarPolicy = Never;
+    MaximumCharacters = 0;
+    Position = (10, 890);
+    Size = (1898, 155);
+    Text = "";
+    TextSize = 13;
+
+    Renderer {
+        BackgroundColor = white;
+        BorderColor = black;
+        Borders = (1, 1, 1, 1);
+        CaretColor = black;
+        CaretWidth = 1;
+        DefaultTextColor = #A0A0A0;
+        Padding = (0, 0, 0, 0);
+        SelectedTextBackgroundColor = #006EFF;
+        SelectedTextColor = white;
+        TextColor = #3C3C3C;
+        TextureBackground = None;
+    }
+}

@@ -25,6 +25,6 @@ set (argentum_VERSION_MINOR 0)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(engine)
-add_subdirectory(examples)
+add_subdirectory(world_editor)
+add_subdirectory(support)
 

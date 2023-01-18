@@ -1,0 +1,7 @@
+add_subdirectory(engine)
+add_subdirectory(level)
+add_subdirectory(graphics)
+add_subdirectory(main)
+add_subdirectory(camera)
+add_subdirectory(events)
+add_subdirectory(ecs)

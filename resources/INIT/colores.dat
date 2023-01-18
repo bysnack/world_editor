@@ -287,25 +287,25 @@ R=0
 G=0
 B=0
 
-# DaÃ±o - Normal
+# Daño - Normal
 [51]
 R=0
 G=179
 B=0
 
-# DaÃ±o - PuÃ±al
+# Daño - Puñal
 [52]
 R=255
 G=51
 B=85
 
-# DaÃ±o - Critico
+# Daño - Critico
 [53]
 R=0
 G=0
 B=0
 
-# DaÃ±o - "FallÃ³"
+# Daño - "Falló"
 [54]
 R=30
 G=179
